@@ -134,7 +134,11 @@ $skip = [
 ]
 
 get '/' do
-  file = File.read('tests/yeowoh_UncleMind.txt')
+  erb :index
+end
+
+post '/' do
+  file = File.read(params[:file][:tempfile])
   @data = JSON.parse(file).select { |d| d.key?("name") }
 
   @data.map do |m|

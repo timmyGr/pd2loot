@@ -1,31 +1,47 @@
 <!DOCTYPE html>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" 
+  integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
 
 <html>
   <head></head>
   <body>
-    <div class="container">
-      <% @data.each do |d| %>
-        <dl class="row">
-          <dt class="col-sm-3">
-            <%= d["name"] %>
-          </dt>
-          <dd class="col-sm-9">
-            <% if d.key?("stats") %>
-              <% d["stats"].each do |s| %>
-                <% unless s["readable"].nil? %>
-                  <p><%= s["readable"] %></p>
+    <div class="container h-100">
+      <div class="jumbotron">
+        <div class="row">
+          <div class="col-sm-12 mb-2">
+            <h1 class="text-center">PD2 Stash Parse</h1>
+          </div>
+        </div>
+      </div>
+      <div class="row h-100 justify-content-center align-items-center">
+        <form class="form-inline" method="POST" enctype="multipart/form-data">
+          <div class="form-group mx-sm-3 mb-2">
+            <input type="file" class="form-control-file" name="file" id="file">
+          </div>
+          <button type="submit" class="btn btn-primary mb-2">Parse</button>
+        </form> 
+      </div>
+    </div>
+    <% if defined?(@data) %>
+      <div class="container">
+        <% @data.each do |d| %>
+          <dl class="row">
+            <dt class="col-sm-3">
+              <%= d["name"] %>
+            </dt>
+            <dd class="col-sm-9">
+              <% if d.key?("stats") %>
+                <% d["stats"].each do |s| %>
+                  <% unless s["readable"].nil? %>
+                    <p><%= s["readable"] %></p>
+                  <% end %>
                 <% end %>
               <% end %>
-            <% end %>
-          </dd>
-        </dl>
-      <% end %>
-    </div>
+            </dd>
+          </dl>
+        <% end %>
+      </div>
+    <% end %>
   </body>
 </html>
-
-<style>
-
-</style>
